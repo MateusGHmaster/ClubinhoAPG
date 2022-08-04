@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id       Int       @id @default(autoincrement())
+  name     String
+  username String    @unique
+  password String
+  master   master[]
+  teacher  teacher[]
+  session  session[]
+}
+
+model master {
+  id     Int  @id @default(autoincrement())
+  userId Int
+  user   user @relation(fields: [userId], references: [id])
+}
+
+model teacher {
+  id         Int     @id @default(autoincrement())
+  permission Boolean
+  userId     Int
+  user       user    @relation(fields: [userId], references: [id])
+}
+
+model session {
+  id      Int     @id @default(autoincrement())
+  token   String
+  userId  Int
+  isAdmin Boolean
+  user    user    @relation(fields: [userId], references: [id])
+}
+
+model kid {
+  id           Int            @id @default(autoincrement())
+  name         String
+  birthDate    DateTime
+  kidsGuardian kidsGuardian[]
+}
+
+model guardian {
+  id           Int            @id @default(autoincrement())
+  name         String
+  phone        String
+  kidsGuardian kidsGuardian[]
+}
+
+model kidsGuardian {
+  id         Int      @id @default(autoincrement())
+  guardianId Int
+  kidId      Int
+  kid        kid      @relation(fields: [kidId], references: [id])
+  guardian   guardian @relation(fields: [guardianId], references: [id])
+}
