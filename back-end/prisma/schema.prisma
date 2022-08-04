@@ -10,35 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id       Int       @id @default(autoincrement())
-  name     String
-  username String    @unique
-  password String
-  master   master[]
-  teacher  teacher[]
-  session  session[]
+model users {
+  id         Int      @id @default(autoincrement())
+  name       String
+  username   String   @unique
+  password   String
+  permission Boolean  @default(true)
+  master     master[]
 }
 
 model master {
-  id     Int  @id @default(autoincrement())
+  id     Int   @id @default(autoincrement())
   userId Int
-  user   user @relation(fields: [userId], references: [id])
-}
-
-model teacher {
-  id         Int     @id @default(autoincrement())
-  permission Boolean
-  userId     Int
-  user       user    @relation(fields: [userId], references: [id])
-}
-
-model session {
-  id      Int     @id @default(autoincrement())
-  token   String
-  userId  Int
-  isAdmin Boolean
-  user    user    @relation(fields: [userId], references: [id])
+  user   users @relation(fields: [userId], references: [id])
 }
 
 model kid {

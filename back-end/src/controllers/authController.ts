@@ -9,7 +9,8 @@ export async function signUp (req: Request, res: Response) {
 
         name: body.name, 
         username: body.username,
-        password: body.password
+        password: body.password,
+        permission: true
 
     };
 

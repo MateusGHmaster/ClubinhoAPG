@@ -1,4 +1,4 @@
-import { CreateUserData, insertUserData, findByUserName } from '../repositories/authRepository.js';
+import findMasterUser, { CreateUserData, insertUserData, findByUserName } from '../repositories/authRepository.js';
 import bcrypt from 'bcrypt';
 import Jwt  from 'jsonwebtoken';
 
@@ -35,6 +35,7 @@ export async function loginService (userData: CreateUserData) {
     
     const { username, password } = userData;
     const user = await findByUserName(username);
+    const master = await findMasterUser(username);
 
     if ((!user) || !(await bcrypt.compare(password, user.password))) {
         throw {
@@ -45,7 +46,24 @@ export async function loginService (userData: CreateUserData) {
         }
     }
 
-    const token = Jwt.sign({ id: user.id, username }, process.env.JWT_SECRET, {expiresIn: '24h'});
+    const masterUsers = master.filter((m) => {
+        return m.userId == user.id;
+    }); 
+
+    let isAdmin = false;
+
+    if (masterUsers.length > 0) {
+        isAdmin = true;
+    } else if (user.permission === false) {
+        throw {
+
+            type: 'unauthorized',
+            message: 'Login: unauthorized'
+
+        }
+    }
+
+    const token = Jwt.sign({ id: user.id, username, isAdmin}, process.env.JWT_SECRET, {expiresIn: '24h'});
 
     return token;
 

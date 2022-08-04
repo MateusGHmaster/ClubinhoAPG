@@ -1,7 +1,7 @@
 import prisma from '../config/database.js';
-import { user } from '@prisma/client';
+import { users } from '@prisma/client';
 
-export type CreateUserData = Omit<user, 'id'>
+export type CreateUserData = Omit<users, 'id'>
 
 export interface userToken {
 
@@ -12,14 +12,22 @@ export interface userToken {
 
 export async function insertUserData (userData: CreateUserData) {
     
-    await prisma.user.create({ data: userData });
+    await prisma.users.create({ data: userData });
 
 }
 
 export async function findByUserName (username: string) {
     
-    const user = await prisma.user.findUnique({ where: { username } });
+    const user = await prisma.users.findUnique({ where: { username } });
 
     return user;
+
+}
+
+export default async function findMasterUser (username: string) {
+    
+    const master = await prisma.master.findMany();
+
+    return master;
 
 }
