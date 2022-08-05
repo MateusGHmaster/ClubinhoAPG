@@ -14,14 +14,10 @@ export default function handleErrorsMiddleware (error, req: Request, res: Respon
         return res.status(404).send(error.message);
     }
 
-    if (error.type === 'method_not_allowed') {
-        return res.status(405).send(error.message);
-    }
-
     if (error.type === 'conflict') {
         return res.status(409).send(error.message);
     }
-
+    
     return res.status(500).send(error);
 
 }

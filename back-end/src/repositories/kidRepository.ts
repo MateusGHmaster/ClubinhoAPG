@@ -1,7 +1,9 @@
 import prisma from "../config/database.js";
-import { kid } from "@prisma/client";
+import { guardian, kid, presence } from "@prisma/client";
 
 export type CreateKidData = Omit<kid, 'id'>
+export type CreateGuardianData = Omit<guardian, 'id'>
+export type CreatePresenceData = Omit<presence, 'id'>
 
 export async function insertKidData (kidData: CreateKidData) {
     
@@ -14,5 +16,25 @@ export async function findByKidName (name: string) {
     const kid = await prisma.kid.findFirst({ where: { name } });
 
     return kid;
+
+}
+
+export async function insertGuardianData (guardianData: CreateGuardianData) {
+    
+    await prisma.guardian.create({ data: guardianData });
+
+}
+
+export async function findKidById (kidId: number) {
+    
+    const result = await prisma.presence.findUnique({ where: { id: kidId } });
+
+    return result;
+
+}
+
+export async function insertKidPresence (presenceData: CreatePresenceData) {
+    
+    await prisma.presence.create({ data: presenceData });
 
 }

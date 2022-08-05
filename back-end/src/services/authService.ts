@@ -47,7 +47,9 @@ export async function loginService (userData: CreateUserData) {
     }
 
     const masterUsers = master.filter((m) => {
+
         return m.userId == user.id;
+        
     }); 
 
     let isAdmin = false;

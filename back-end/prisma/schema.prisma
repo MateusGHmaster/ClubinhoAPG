@@ -26,23 +26,25 @@ model master {
 }
 
 model kid {
-  id           Int            @id @default(autoincrement())
-  name         String
-  birthDate    DateTime
-  kidsGuardian kidsGuardian[]
+  id         Int        @id @default(autoincrement())
+  name       String
+  birthDate  String
+  guardianId Int
+  presence   presence[]
+  guardian   guardian   @relation(fields: [guardianId], references: [id])
 }
 
 model guardian {
-  id           Int            @id @default(autoincrement())
-  name         String
-  phone        String
-  kidsGuardian kidsGuardian[]
+  id    Int    @id @default(autoincrement())
+  name  String
+  phone String
+  kid   kid[]
 }
 
-model kidsGuardian {
-  id         Int      @id @default(autoincrement())
-  guardianId Int
-  kidId      Int
-  kid        kid      @relation(fields: [kidId], references: [id])
-  guardian   guardian @relation(fields: [guardianId], references: [id])
+model presence {
+  id        Int     @id @default(autoincrement())
+  date      String
+  isPresent Boolean @default(false)
+  kidId     Int
+  kid       kid     @relation(fields: [kidId], references: [id])
 }
