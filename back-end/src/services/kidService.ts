@@ -1,4 +1,4 @@
-import { CreateKidData, CreatePresenceData, insertKidData, findByKidName, findKidById, insertKidPresence, CreateGuardianData, insertGuardianData } from '../repositories/kidRepository.js';
+import { CreateKidData, CreatePresenceData, insertKidData, findByKidName, insertKidPresence, CreateGuardianData, insertGuardianData, getPresenceHistoryById } from '../repositories/kidRepository.js';
 
 export async function kidRegistrationService (kidData: CreateKidData) {
 
@@ -27,5 +27,22 @@ export async function guardianRegistrationService (guardianData: CreateGuardianD
 export async function kidPresenceService (presenceData: CreatePresenceData) {
 
     await insertKidPresence(presenceData);
+
+}
+
+export async function getPresenceHistoryService (kidId: number) {
+
+    const presenceHistory = await getPresenceHistoryById(kidId);
+
+    if (!presenceHistory) {
+        throw {
+
+            type: 'not_found',
+            message: 'Kid: presence history not found'
+
+        }
+    }
+
+    return presenceHistory;
 
 }

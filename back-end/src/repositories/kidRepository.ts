@@ -38,3 +38,9 @@ export async function insertKidPresence (presenceData: CreatePresenceData) {
     await prisma.presence.create({ data: presenceData });
 
 }
+
+export async function getPresenceHistoryById (kidId: number) {
+    
+    return await prisma.presence.findMany({ where: { kidId} });
+
+}

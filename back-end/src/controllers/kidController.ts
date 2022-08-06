@@ -51,3 +51,12 @@ export async function kidPresence (req: Request, res: Response) {
     res.sendStatus(200);
 
 }
+
+export async function presenceHistory (req: Request, res: Response) {
+
+    const { id } = req.params;
+    const presenceHistory = await kidService.getPresenceHistoryService(+id);
+
+    res.send(presenceHistory);
+
+}
