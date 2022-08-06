@@ -34,7 +34,7 @@ export async function findKidById (kidId: number) {
 }
 
 export async function insertKidPresence (presenceData: CreatePresenceData) {
-    
+
     await prisma.presence.create({ data: presenceData });
 
 }

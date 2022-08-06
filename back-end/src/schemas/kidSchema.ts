@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import Joi, { boolean, string } from 'joi';
 
 export const kidSchema = Joi.object({
     
@@ -12,5 +12,13 @@ export const guardianSchema = Joi.object({
 
     name: Joi.string().required(),
     phone: Joi.string().required()
+
+});
+
+export const presenceSchema = Joi.object({
+
+    kidId: Joi.number().required(),
+    date: Joi.string().required(),
+    isPresent: Joi.boolean().default(false).required()
 
 });

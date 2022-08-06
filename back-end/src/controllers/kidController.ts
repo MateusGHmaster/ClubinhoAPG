@@ -36,16 +36,16 @@ export async function guardianRegistration(req: Request, res: Response) {
 }
 
 export async function kidPresence (req: Request, res: Response) {
-   
+
     const body: { kidId: number, date: string, isPresent: boolean } = req.body;
     const kidPresence: CreatePresenceData = {
 
-        kidId: body.kidId,
+        kidId: +body.kidId,
         date: body.date,
-        isPresent: true
+        isPresent: body.isPresent
 
     }
-    
+
     await kidService.kidPresenceService(kidPresence);
 
     res.sendStatus(200);
