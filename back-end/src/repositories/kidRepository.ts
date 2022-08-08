@@ -44,3 +44,23 @@ export async function getPresenceHistoryById (kidId: number) {
     return await prisma.presence.findMany({ where: { kidId} });
 
 }
+
+export async function getKidInfo (kidId: number) {
+    
+    const result = await prisma.kid.findUnique({ 
+        where: {
+            id: kidId 
+        },
+        include: {
+            guardian: {
+                select: {
+                    name: true,
+                    phone: true
+                }
+            }
+        } 
+    });
+
+    return result;
+
+}

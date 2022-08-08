@@ -60,3 +60,12 @@ export async function presenceHistory (req: Request, res: Response) {
     res.send(presenceHistory);
 
 }
+
+export async function getKidInfo (req: Request, res: Response) {
+    
+    const { id } = req.params;
+    const kidInfo = await kidService.getKidInfoService(+id);
+
+    res.send(kidInfo);
+
+}
