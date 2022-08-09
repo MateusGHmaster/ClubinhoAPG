@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-export default function Login () {
+export default function Home () {
 
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();

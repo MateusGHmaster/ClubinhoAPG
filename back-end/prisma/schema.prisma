@@ -35,10 +35,10 @@ model kid {
 }
 
 model guardian {
-  id    Int    @id @default(autoincrement())
-  name  String
-  phone String
-  kid   kid[]
+  id            Int    @id @default(autoincrement())
+  guardianName  String
+  guardianPhone Int
+  kid           kid[]
 }
 
 model presence {

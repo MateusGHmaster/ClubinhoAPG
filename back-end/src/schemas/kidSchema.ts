@@ -10,8 +10,8 @@ export const kidSchema = Joi.object({
 
 export const guardianSchema = Joi.object({
 
-    name: Joi.string().required(),
-    phone: Joi.string().required()
+    guardianName: Joi.string().required(),
+    guardianPhone: Joi.number().required()
 
 });
 

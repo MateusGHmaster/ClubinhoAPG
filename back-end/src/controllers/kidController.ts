@@ -21,18 +21,18 @@ export async function kidRegistration (req: Request, res: Response) {
 
 export async function guardianRegistration(req: Request, res: Response) {
     
-    const body: { name: string, phone: string } = req.body;
+    const body: { guardianName: string, guardianPhone: number } = req.body;
     const guardianData: CreateGuardianData = {
 
-        name: body.name,
-        phone: body.phone
+        guardianName: body.guardianName,
+        guardianPhone: +body.guardianPhone
 
     }
 
-    await kidService.guardianRegistrationService(guardianData);
+    const guardianDataInsertion = await kidService.guardianRegistrationService(guardianData);
 
-    res.sendStatus(201);
-
+    res.status(201).send([guardianDataInsertion.id]);
+    
 }
 
 export async function kidPresence (req: Request, res: Response) {

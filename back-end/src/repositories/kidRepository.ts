@@ -20,8 +20,10 @@ export async function findByKidName (name: string) {
 }
 
 export async function insertGuardianData (guardianData: CreateGuardianData) {
-    
-    await prisma.guardian.create({ data: guardianData });
+   
+    const guardianInsertion = await prisma.guardian.create({ data: guardianData });
+   
+    return guardianInsertion;
 
 }
 
@@ -54,8 +56,8 @@ export async function getKidInfo (kidId: number) {
         include: {
             guardian: {
                 select: {
-                    name: true,
-                    phone: true
+                    guardianName: true,
+                    guardianPhone: true
                 }
             }
         } 

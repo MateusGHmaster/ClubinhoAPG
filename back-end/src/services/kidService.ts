@@ -20,7 +20,9 @@ export async function kidRegistrationService (kidData: CreateKidData) {
 
 export async function guardianRegistrationService (guardianData: CreateGuardianData) {
     
-    await insertGuardianData(guardianData);
+    const guardianDataInsertion = await insertGuardianData(guardianData);
+
+    return guardianDataInsertion;
 
 }
 
