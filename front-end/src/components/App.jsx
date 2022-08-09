@@ -18,7 +18,7 @@ export default function App () {
                 <Routes>
                     <Route path='/' element={<Login setToken={() => {}}/>}/>
                     <Route path='/sign-up' element={<Register />}/>
-                    <Route path='/register-kid' element={<KidRegistration token={''} />}/>
+                    <Route path='/register' element={<KidRegistration token={''} />}/>
                     <Route path='/presence' element={<Presence token={''} />}/>
                     <Route path='/history/:id' element={<History token={''} />}/>
                     <Route path='/info/:id' element={<Information token={''} />}/>
