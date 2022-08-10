@@ -1,4 +1,4 @@
-import { CreateKidData, CreatePresenceData, insertKidData, findByKidName, insertKidPresence, CreateGuardianData, insertGuardianData, getPresenceHistoryById, findKidById, getKidInfo } from '../repositories/kidRepository.js';
+import { CreateKidData, CreatePresenceData, insertKidData, findByKidName, insertKidPresence, CreateGuardianData, insertGuardianData, getPresenceHistoryById, findKidById, getKidInfo, getRegisteredKidsList } from '../repositories/kidRepository.js';
 
 export async function kidRegistrationService (kidData: CreateKidData) {
 
@@ -23,6 +23,12 @@ export async function guardianRegistrationService (guardianData: CreateGuardianD
     const guardianDataInsertion = await insertGuardianData(guardianData);
 
     return guardianDataInsertion;
+
+}
+
+export async function getKidsListService () {
+    
+    return await getRegisteredKidsList();
 
 }
 

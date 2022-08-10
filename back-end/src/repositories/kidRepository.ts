@@ -35,6 +35,14 @@ export async function findKidById (kidId: number) {
 
 }
 
+export async function getRegisteredKidsList () {
+    
+    const result = await prisma.kid.findMany();
+
+    return result;
+
+}
+
 export async function insertKidPresence (presenceData: CreatePresenceData) {
 
     await prisma.presence.create({ data: presenceData });

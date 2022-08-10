@@ -39,7 +39,7 @@ export default function Register () {
 
             navigate('/'); 
 
-        })
+        });
 
         promise.catch (e => {
 
@@ -51,7 +51,7 @@ export default function Register () {
             
             refreshOnError();
 
-        })
+        });
 
     }
 

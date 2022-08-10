@@ -35,6 +35,14 @@ export async function guardianRegistration(req: Request, res: Response) {
     
 }
 
+export async function getKidsList (req: Request, res: Response) {
+ 
+    const kidsList = await kidService.getKidsListService();
+
+    res.status(201).send(kidsList);
+
+}
+
 export async function kidPresence (req: Request, res: Response) {
 
     const body: { kidId: number, date: string, isPresent: boolean } = req.body;
