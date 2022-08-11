@@ -1,17 +1,51 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import infoIcon from '../../assets/info.png';
-import Information from '../Information/Information';
+import dayjs from 'dayjs';
+import axios from 'axios';
+import { useState } from 'react';
 
-export default function Kid ({ id, name }) {
+
+export default function Kid ({ id, name, isPresent }) {
     
+    const date = new dayjs().format('DD/MM/YYYY');
+    const [presence, setPresence] = useState(isPresent);
     const navigate = useNavigate();
+
+    function kidPresence () {
+
+        const promise = axios.post('http://localhost:5000/presence', {
+
+            kidId: id,
+            date,
+            isPresent: !presence
+
+
+        });
+
+        promise.then (response => {
+
+            setPresence(!presence);
+
+        })
+
+        promise.catch (e => {
+
+            console.log(e);
+
+            alert('Sentimos muito, mas correu um erro. Por favor, tente novamente.   ( 0 _ 0 )');
+        
+        })
+    }
 
     return (
         
         <KidContainer>
             <KidName>{name}</KidName>
-            <KidInfo src={infoIcon} alt={'info'} onClick={()=> {navigate(`/info/${id}`,{state: { id: id }})}} />
+            <PresenceToggle onClick={() => kidPresence()}>
+                { presence ? (<Present>PRESENTE</Present>) : (<Absent>AUSENTE</Absent>) }
+            </PresenceToggle>
+            <KidInfo src={infoIcon} alt={'info'} onClick={() => {navigate(`/info/${id}`,{state: { id: id }})}} />
         </KidContainer>
     
     );
@@ -23,7 +57,7 @@ const KidContainer = styled.div`
     position: relative;
 
     height: 45px;
-    width: 390px;
+    width: 360px;
 
     padding-left: 5px;
     padding-right: 5px;
@@ -49,7 +83,58 @@ const KidName = styled.div`
     display: flex;
     align-items: center;
 
-    font-size: 16px;
+    font-size: 15px;
+
+`;
+
+const PresenceToggle = styled.div`
+
+    position: absolute;
+
+    margin-left: 255px;
+
+    height: fit-content;
+    width: fit-content;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+`;
+
+const Present = styled.div`
+
+    margin-left: -5px;
+    padding: 5px;
+
+    height: fit-content;
+    width: fit-content;
+
+    font-size: 15px;
+    
+    background-color: green;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    color: white;
+
+`;
+
+const Absent = styled.div`
+
+    padding: 5px;
+
+    height: fit-content;
+    width: fit-content;
+
+    font-size: 15px;
+
+    background-color: red;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    color: white;
 
 `;
 
@@ -61,7 +146,7 @@ const KidInfo = styled.img`
     display: flex;
     align-items: center;
 
-    margin-left: 370px;
+    margin-left: 338px;
 
     z-index: 1;
 

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import LoadingSpin from 'react-loading-spin';
 import axios from 'axios';
 import styled from 'styled-components';
+import loginWallpaper from '../../assets/C2.jpg';
 
 
 export default function Login () {
@@ -55,21 +56,25 @@ export default function Login () {
     }
 
     return (
-        <LoginBody>
-            <Logo />
-            <LoginContainer>
-                <Input type={'text'} placeholder={'Usuário'} value={username} onChange={(e) => setUsername(e.target.value)}/>
-                <Input type={'password'} placeholder={'Senha'} value={password} onChange={(e) => setPassword(e.target.value)}/>
-                <Button onClick={loginUser}>
-                    {loading ? (<LoadingSpin primaryColor={'#FFFFFF'} secondaryColor={'transparent'} size={'35px'} width={8} />
-                        ) : (
-                            'Entrar'        
-                        ) 
-                    }
-                </Button>
-                <StyledLink href='https://api.whatsapp.com/send?phone=5592992924104' target='_blank'>Não tem uma conta? Peça aqui!</StyledLink>
-            </LoginContainer>
-        </LoginBody>
+        <>
+            <BackgroundColor></BackgroundColor>
+            <Wallpaper src={loginWallpaper} alt={'papel de parede'}/>
+            <LoginBody>
+                <Logo />
+                <LoginContainer>
+                    <Input type={'text'} placeholder={'Usuário'} value={username} onChange={(e) => setUsername(e.target.value)}/>
+                    <Input type={'password'} placeholder={'Senha'} value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <Button onClick={loginUser}>
+                        {loading ? (<LoadingSpin primaryColor={'#FFFFFF'} secondaryColor={'transparent'} size={'35px'} width={8} />
+                            ) : (
+                                'Entrar'        
+                            ) 
+                        }
+                    </Button>
+                    <StyledLink href='https://api.whatsapp.com/send?phone=5592992924104' target='_blank'>Não tem uma conta? Peça aqui!</StyledLink>
+                </LoginContainer>
+            </LoginBody>
+        </>
     );
 
 }
@@ -82,8 +87,40 @@ const LoginBody = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    z-index: 1;
 
 `;
+
+const BackgroundColor = styled.div`
+
+    position: absolute;
+
+    margin-top: -50px;
+    margin-left: -10px;
+
+    height: 100%;
+    width: 100%;
+
+    background-color: #7cd756;
+    /* background-color: gray; */
+
+    opacity: 0.8;
+
+    z-index: 1;
+
+`;
+
+const Wallpaper = styled.img`
+
+    margin-top: -50px;
+    margin-left: -10px;
+
+    position: absolute;
+
+    background-position: top;  
+    background-size: cover; 
+
+`
 
 const LoginContainer = styled.div`
 
@@ -94,6 +131,8 @@ const LoginContainer = styled.div`
     align-items: center;
     flex-direction: column;
     font-family: 'Roboto', sans-serif;
+
+    z-index: 1;
 
 `;
 

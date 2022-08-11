@@ -86,7 +86,7 @@ export default function KidRegistration () {
                 <GuardianInfoContainer>
                     <Title>Dados do Responsável</Title>
                     <Input type={'guardianName'} placeholder={'Nome'} value={guardianName} onChange={(e) => setGuardianName(e.target.value)}/>
-                    <Input type={'guardianName'} placeholder={'Telefone'} value={guardianPhone} onChange={(e) => setGuardianPhone(e.target.value)}/>
+                    <Input type={'guardianName'} placeholder={'Telefone (obs: sem DDD)'} value={guardianPhone} onChange={(e) => setGuardianPhone(e.target.value)}/>
                 </GuardianInfoContainer>
                 <Button onClick={registerKid}>
                     {loading ? (<LoadingSpin primaryColor={'#FFFFFF'} secondaryColor={'transparent'} size={'35px'} width={8} />

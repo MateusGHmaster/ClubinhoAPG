@@ -77,3 +77,11 @@ export async function getKidInfo (req: Request, res: Response) {
     res.send(kidInfo);
 
 }
+
+export async function getCurrentPresenceState (req: Request, res: Response) {
+    
+    const currentPresenceState = await kidService.getKidsPresenceTodayService();
+    
+    res.send(currentPresenceState);
+
+}

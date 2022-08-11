@@ -1,5 +1,6 @@
-import prisma from "../config/database.js";
-import { guardian, kid, presence } from "@prisma/client";
+import prisma from '../config/database.js';
+import { guardian, kid, presence } from '@prisma/client';
+import dayjs from 'dayjs';
 
 export type CreateKidData = Omit<kid, 'id'>
 export type CreateGuardianData = Omit<guardian, 'id'>
@@ -70,6 +71,14 @@ export async function getKidInfo (kidId: number) {
             }
         } 
     });
+
+    return result;
+
+}
+
+export async function getPresenceToday () {
+    
+    const result = await prisma.presence.findMany();
 
     return result;
 

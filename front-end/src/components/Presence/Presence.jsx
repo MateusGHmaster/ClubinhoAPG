@@ -8,6 +8,7 @@ import axios from 'axios';
 export default function Presence () {
 
     const [kids, setKids] = useState ([]);
+    const [present, setPresent] = useState([]);
     /*const { token } = useContext(AuthContext);*/
     
     const navigate = useNavigate();
@@ -28,6 +29,7 @@ export default function Presence () {
         promise.then (response => {
             const {data} = response;
             setKids(data);
+            setPresent(true);
         })
         promise.catch (e => {
             console.log(e);
@@ -37,35 +39,76 @@ export default function Presence () {
 
     }
 
+    function checkCurrentPresenceState () {
+
+        const promise = axios.get('http://localhost:5000/presence');
+
+        promise.then(response => {
+
+            const { data } = response;
+
+            setPresent(data);
+
+        });
+
+        promise.catch(e => {
+
+            console.log(e);
+
+        });
+
+    }
+
     useEffect(() => {
 
         getKidsList();
+        checkCurrentPresenceState();
 
     }, []);
 
     function showKidsList () {
 
-        if(kids.length > 0) {
+        if(kids.length > 0 && present.length > 0) {
             return kids.map(kid => {
-                const { id, name} = kid;
+                const { id, name } = kid;
                 return (
                     <>
-                        <Kid id={id} name={name} />
+                        <Kid id={id} name={name} isPresent={() => {
+                            return checkIfIsPresent(id)
+                        }}/>
                     </>
                 );
             });
         }
+
+        function checkIfIsPresent (id) {
+
+            const presence = present.filter((value) => {
+                return value.kidId === id;
+            });
+
+            return presence[0].isPresent;
+
+        }
+
     }
+    if (showKidsList !== null) {
 
-    return (
+        return (
+    
+            <PresenceBody>
+                <Title>Presença</Title>
+                <KidsList>
+                    {showKidsList()}
+                </KidsList>
+            </PresenceBody>
+        );
 
-        <PresenceBody>
-            <Title>Presença</Title>
-            <KidsList>
-                {showKidsList()}
-            </KidsList>
-        </PresenceBody>
-    );
+    } else {
+        return (
+            <>Loading...</>
+        )
+    }
 
 }
 
