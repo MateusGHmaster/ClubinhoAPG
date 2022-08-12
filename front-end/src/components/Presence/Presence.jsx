@@ -42,19 +42,12 @@ export default function Presence () {
     function checkCurrentPresenceState () {
 
         const promise = axios.get('http://localhost:5000/presence');
-
         promise.then(response => {
-
             const { data } = response;
-
             setPresent(data);
-
         });
-
         promise.catch(e => {
-
             console.log(e);
-
         });
 
     }

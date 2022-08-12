@@ -34,7 +34,6 @@ export default function KidRegistration () {
         promise.then (response => {
 
             const guardianId = response.data[0];
-            console.log(`Passou na primeira promise: guardianId => ${guardianId}`);
 
             const secondPromise = axios.post('http://localhost:5000/register-c', {
 
@@ -47,7 +46,6 @@ export default function KidRegistration () {
             secondPromise.then(secondResponse => {
 
                 const registered = secondResponse.data;
-                console.log(`Passou na segunda promise: registered => ${registered}`);
 
                 setLoading(false);
 
@@ -80,12 +78,12 @@ export default function KidRegistration () {
             <RegisterContainer>
                 <KidInfoContainer>
                     <Title>Dados da Criança</Title>
-                    <Input type={'text'} placeholder={'Nome'} value={name} onChange={(e) => setName(e.target.value)}/>
-                    <Input type={'text'} placeholder={'Data de nascimento'} value={birthDate} onChange={(e) => setBirthDate(e.target.value)}/>
+                    <Input type={'text'} placeholder={'Nome completo'} value={name} onChange={(e) => setName(e.target.value)}/>
+                    <Input type={'text'} placeholder={'Data de nascimento (dd/mm/aaaa)'} value={birthDate} onChange={(e) => setBirthDate(e.target.value)}/>
                 </KidInfoContainer>
                 <GuardianInfoContainer>
                     <Title>Dados do Responsável</Title>
-                    <Input type={'guardianName'} placeholder={'Nome'} value={guardianName} onChange={(e) => setGuardianName(e.target.value)}/>
+                    <Input type={'guardianName'} placeholder={'Nome completo'} value={guardianName} onChange={(e) => setGuardianName(e.target.value)}/>
                     <Input type={'guardianName'} placeholder={'Telefone (obs: sem DDD)'} value={guardianPhone} onChange={(e) => setGuardianPhone(e.target.value)}/>
                 </GuardianInfoContainer>
                 <Button onClick={registerKid}>

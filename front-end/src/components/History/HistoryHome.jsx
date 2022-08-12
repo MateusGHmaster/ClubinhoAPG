@@ -12,47 +12,37 @@ export default function Home () {
 
     return (
 
-        <HomeBody>
+        <HistoryPageBody>
             <Logo />
-            <HomeContainer>
+            <HistoryContainer>
                 <Button onClick={() => {
-                        navigate('/register')
+                        navigate('/history-date')
                         setLoading(true);
                     }}>
                         {loading ? (<LoadingSpin primaryColor={'#FFFFFF'} secondaryColor={'transparent'} size={'35px'} width={8} />
                             ) : (
-                                'Registrar Criança'        
+                                'Histórico por Data'        
                             ) 
                         }
                 </Button>
                 <Button onClick={() => {
-                        navigate('/presence')
+                        navigate('/history-kid')
                         setLoading(true);
                     }}>
                         {loading ? (<LoadingSpin primaryColor={'#FFFFFF'} secondaryColor={'transparent'} size={'35px'} width={8} />
                             ) : (
-                                'Marcar Presença'        
+                                'Histórico por Criança'        
                             ) 
                         }
                 </Button>
-                <Button onClick={() => {
-                        navigate('/history')
-                        setLoading(true);
-                    }}>
-                        {loading ? (<LoadingSpin primaryColor={'#FFFFFF'} secondaryColor={'transparent'} size={'35px'} width={8} />
-                            ) : (
-                                'Histórico de Presenças'        
-                            ) 
-                        }
-                </Button>
-            </HomeContainer>
-        </HomeBody>
+            </HistoryContainer>
+        </HistoryPageBody>
         
     );
 
 }
 
-const HomeBody = styled.div`
+const HistoryPageBody = styled.div`
 
     margin-top: 50px;
 
@@ -63,7 +53,7 @@ const HomeBody = styled.div`
 
 `;
 
-const HomeContainer = styled.div`
+const HistoryContainer = styled.div`
 
     position: absolute;
 

@@ -1,4 +1,18 @@
-import { CreateKidData, CreatePresenceData, insertKidData, findByKidName, insertKidPresence, CreateGuardianData, insertGuardianData, getPresenceHistoryById, findKidById, getKidInfo, getRegisteredKidsList, getPresenceToday } from '../repositories/kidRepository.js';
+import { 
+    CreateKidData, 
+    CreatePresenceData, 
+    insertKidData, 
+    findByKidName, 
+    insertKidPresence, 
+    CreateGuardianData, 
+    insertGuardianData, 
+    getPresenceHistoryById, 
+    findKidById, 
+    getKidInfo, 
+    getRegisteredKidsList, 
+    getPresenceToday, 
+    getKidsPresenceByDateRepo 
+} from '../repositories/kidRepository.js';
 import dayjs from 'dayjs';
 
 export async function kidRegistrationService (kidData: CreateKidData) {
@@ -75,7 +89,7 @@ export async function getKidInfoService (kidId: number) {
 
 export async function getKidsPresenceTodayService () {
     
-    const date = dayjs().format('DD/MM/YYYY');
+    const date = dayjs().format('DD-MM-YYYY');
     const kidsPresenceList = await getPresenceToday();
     const idArray = [];
 
@@ -93,13 +107,46 @@ export async function getKidsPresenceTodayService () {
         const include = idArray.includes(listByDate[i].kidId);
 
         if (!include) {
-            idArray.push( listByDate[i].kidId);
+            idArray.push(listByDate[i].kidId);
             listByKidId.push(listByDate[i]);
         }
         
     }
 
     return listByKidId;
+
+}
+
+export async function getPresenceDaysService () {
+    
+    const daysHistory = await getPresenceToday();
+
+    return daysHistory;
+
+}
+
+export async function getKidsPresenceByDateService (date: string) {
+    
+    const presenceByDate = await getKidsPresenceByDateRepo(date);
+
+    if (!presenceByDate) {
+        throw {
+
+            type: 'not_found',
+            message: 'Presences: not found'
+
+        }
+    }
+
+    return presenceByDate;
+
+}
+
+export async function findKidByIdService (kidId: number) {
+    
+    const kid = await findKidById(kidId);
+
+    return kid;
 
 }
 

@@ -60,12 +60,29 @@ export async function kidPresence (req: Request, res: Response) {
 
 }
 
-export async function presenceHistory (req: Request, res: Response) {
+export async function getPresenceHistoryByKid (req: Request, res: Response) {
 
     const { id } = req.params;
     const presenceHistory = await kidService.getPresenceHistoryService(+id);
 
     res.send(presenceHistory);
+
+}
+
+export async function getKidsPresenceByDate (req: Request, res: Response) {
+
+    const { date } = req.params;
+    const presenceByDate = await kidService.getKidsPresenceByDateService(date);
+
+    res.send(presenceByDate);
+
+}
+
+export async function getPresenceDaysHistory (req: Request, res: Response) {
+    
+    const daysHistory = await kidService.getPresenceDaysService();
+
+    res.send(daysHistory);
 
 }
 
@@ -83,5 +100,14 @@ export async function getCurrentPresenceState (req: Request, res: Response) {
     const currentPresenceState = await kidService.getKidsPresenceTodayService();
     
     res.send(currentPresenceState);
+
+}
+
+export async function findKidById (req: Request, res: Response) {
+    
+    const { kidId } = req.params;
+    const kid = await kidService.findKidByIdService(+kidId);
+
+    res.send(kid);
 
 }

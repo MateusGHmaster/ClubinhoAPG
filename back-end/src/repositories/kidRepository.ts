@@ -30,7 +30,7 @@ export async function insertGuardianData (guardianData: CreateGuardianData) {
 
 export async function findKidById (kidId: number) {
     
-    const result = await prisma.presence.findUnique({ where: { id: kidId } });
+    const result = await prisma.kid.findFirst({ where: { id: kidId } });
 
     return result;
 
@@ -52,7 +52,7 @@ export async function insertKidPresence (presenceData: CreatePresenceData) {
 
 export async function getPresenceHistoryById (kidId: number) {
     
-    return await prisma.presence.findMany({ where: { kidId} });
+    return await prisma.presence.findMany({ where: { kidId } });
 
 }
 
@@ -79,6 +79,14 @@ export async function getKidInfo (kidId: number) {
 export async function getPresenceToday () {
     
     const result = await prisma.presence.findMany();
+
+    return result;
+
+}
+
+export async function getKidsPresenceByDateRepo (date: string) {
+    
+    const result = await prisma.presence.findMany({ where: { date: date } });
 
     return result;
 

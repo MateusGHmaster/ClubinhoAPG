@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 export default function Kid ({ id, name, isPresent }) {
     
-    const date = new dayjs().format('DD/MM/YYYY');
+    const date = new dayjs().format('DD-MM-YYYY');
     const [presence, setPresence] = useState(isPresent);
     const navigate = useNavigate();
 
