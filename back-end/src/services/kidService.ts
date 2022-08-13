@@ -66,7 +66,22 @@ export async function getPresenceHistoryService (kidId: number) {
         }
     }
 
-    return presenceHistory;
+    const pivotArray = [];
+
+    const presenceDays = [];
+
+    for (let i = presenceHistory.length - 1; i >= 0; i --) {
+
+        const include = pivotArray.includes(presenceHistory[i].date);
+
+        if (!include) {
+            pivotArray.push(presenceHistory[i].date);
+            presenceDays.push(presenceHistory[i]);
+        }
+        
+    }
+
+    return presenceDays;
 
 }
 
@@ -121,7 +136,22 @@ export async function getPresenceDaysService () {
     
     const daysHistory = await getPresenceToday();
 
-    return daysHistory;
+    const pivotArray = [];
+
+    const presenceDays = [];
+
+    for (let i = daysHistory.length - 1; i >= 0; i --) {
+
+        const include = pivotArray.includes(daysHistory[i].date);
+
+        if (!include) {
+            pivotArray.push(daysHistory[i].date);
+            presenceDays.push(daysHistory[i]);
+        }
+        
+    }
+
+    return presenceDays;
 
 }
 
@@ -138,7 +168,22 @@ export async function getKidsPresenceByDateService (date: string) {
         }
     }
 
-    return presenceByDate;
+    const pivotArray = [];
+
+    const presentKidsOnThatDay = [];
+
+    for (let i = presenceByDate.length - 1; i >= 0; i --) {
+
+        const include = pivotArray.includes(presenceByDate[i].kidId);
+
+        if (!include) {
+            pivotArray.push(presenceByDate[i].kidId);
+            presentKidsOnThatDay.push(presenceByDate[i]);
+        }
+        
+    }
+
+    return presentKidsOnThatDay;
 
 }
 

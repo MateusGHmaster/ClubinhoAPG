@@ -79,7 +79,7 @@ export async function getKidInfo (kidId: number) {
 export async function getPresenceToday () {
     
     const result = await prisma.presence.findMany();
-
+    
     return result;
 
 }
