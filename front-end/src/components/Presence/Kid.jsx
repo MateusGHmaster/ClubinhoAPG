@@ -27,15 +27,14 @@ export default function Kid ({ id, name, isPresent }) {
 
             setPresence(!presence);
 
-        })
+        });
 
         promise.catch (e => {
 
             console.log(e);
-
-            alert('Sentimos muito, mas correu um erro. Por favor, tente novamente.   ( 0 _ 0 )');
         
-        })
+        });
+
     }
 
     return (

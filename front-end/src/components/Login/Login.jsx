@@ -35,7 +35,6 @@ export default function Login () {
             setLoading(false);
 
             const { data } = response;
-            console.log(data);
 
             /* setToken(data.token);
             setUser(data); */

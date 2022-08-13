@@ -68,7 +68,7 @@ export default function Presence () {
                     <>
                         <Kid id={id} name={name} isPresent={() => {
                             return checkIfIsPresent(id)
-                        }}/>
+                        }} />
                     </>
                 );
             });
@@ -80,11 +80,12 @@ export default function Presence () {
                 return value.kidId === id;
             });
 
-            return presence[0].isPresent;
+            return presence[0]?.isPresent;
 
         }
 
     }
+    
     if (showKidsList !== null) {
 
         return (
