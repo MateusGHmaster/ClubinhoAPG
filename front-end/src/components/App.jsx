@@ -12,6 +12,7 @@ import HistoryByDate from '../components/History/HistoryByDate';
 import HistoryByKid from '../components/History/HistoryByKid';
 import HistoryByDateUnique from '../components/History/HistoryByDateUnique';
 import HistoryByKidUnique from '../components/History/HistoryByKidUnique';
+import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 
 export default function App () {
 
@@ -22,15 +23,15 @@ export default function App () {
                 <Routes>
                     <Route path='/' element={<Login setToken={() => {}}/>}/>
                     <Route path='/sign-up' element={<Register />}/>
-                    <Route path='/register' element={<KidRegistration token={''} />}/>
-                    <Route path='/presence' element={<Presence token={''} />}/>
-                    <Route path='/history' element={<HistoryHome token={''} />}/>
-                    <Route path='/history-date/' element={<HistoryByDate token={''} />}/>
-                    <Route path='/history-date-unique/:date' element={<HistoryByDateUnique token={''} />}/>
-                    <Route path='/history-kid/' element={<HistoryByKid token={''} />}/>
-                    <Route path='/history-kid-unique/:id' element={<HistoryByKidUnique token={''} />}/>
-                    <Route path='/info/:id' element={<Information token={''} />}/>
-                    <Route path='/home' element={<Home token={''} />}/>
+                    <Route path='/register' element={<PrivateRoute><KidRegistration /></PrivateRoute>}/>
+                    <Route path='/presence' element={<PrivateRoute><Presence /></PrivateRoute>}/>
+                    <Route path='/history' element={<PrivateRoute><HistoryHome /></PrivateRoute>}/>
+                    <Route path='/history-date/' element={<PrivateRoute><HistoryByDate /></PrivateRoute>}/>
+                    <Route path='/history-date-unique/:date' element={<PrivateRoute><HistoryByDateUnique /></PrivateRoute>}/>
+                    <Route path='/history-kid/' element={<PrivateRoute><HistoryByKid /></PrivateRoute>}/>
+                    <Route path='/history-kid-unique/:id' element={<PrivateRoute><HistoryByKidUnique /></PrivateRoute>}/>
+                    <Route path='/info/:id' element={<PrivateRoute><Information/></PrivateRoute>}/>
+                    <Route path='/home' element={<PrivateRoute><Home /></PrivateRoute>}/>
                 </Routes>
             </BrowserRouter>
         </AuthContextProvider>

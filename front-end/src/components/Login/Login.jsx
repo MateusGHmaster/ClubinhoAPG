@@ -1,9 +1,9 @@
 import Logo from '../General/LogoLogin';
 import Input from '../General/Input';
 import Button from '../General/Button';
-import { useState, /* useContext */ } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-/* import { AuthContext } from '../../context/AuthContext'; */
+import { AuthContext } from '../../context/AuthContext'; 
 import LoadingSpin from 'react-loading-spin';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -15,9 +15,10 @@ export default function Login () {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const [admin, setAdmin] = useState(false);
+    const { setToken } = useContext(AuthContext);
 
     const navigate = useNavigate();
-    /* const { setToken, setUser } = useContext(AuthContext); */
 
     function loginUser () {
 
@@ -36,10 +37,12 @@ export default function Login () {
 
             const { data } = response;
 
-            /* setToken(data.token);
-            setUser(data); */
+            localStorage.setItem('token', JSON.stringify(data[0]));
+            
+            setToken(data[0]);
+            setAdmin(data[1].isAdmin);
 
-            navigate('/home'); 
+            navigate('/home',{state: { admin: data[1].isAdmin  }});
 
         })
 

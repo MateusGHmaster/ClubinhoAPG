@@ -61,7 +61,7 @@ export default function Presence () {
 
     function showKidsList () {
 
-        if(kids.length > 0 && present.length > 0) {
+        if(kids.length > 0 && present.length >= 0) {
             return kids.map(kid => {
                 const { id, name } = kid;
                 return (

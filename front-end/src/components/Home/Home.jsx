@@ -1,12 +1,14 @@
 import Button from '../General/Button';
 import Logo from '../General/LogoLogin';
 import LoadingSpin from 'react-loading-spin';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import styled from 'styled-components';
 
 export default function Home () {
 
+    const location = useLocation();
+    const { admin } = location.state;
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -45,6 +47,19 @@ export default function Home () {
                             ) 
                         }
                 </Button>
+                { admin ? (
+                        <Button onClick={() => {
+                                navigate('/sign-up')
+                                setLoading(true);
+                            }}>
+                                {loading ? (<LoadingSpin primaryColor={'#FFFFFF'} secondaryColor={'transparent'} size={'35px'} width={8} />
+                                    ) : (
+                                        'Registrar Novo Professor'        
+                                    ) 
+                                }
+                        </Button>
+                    ) : <></>
+                }
             </HomeContainer>
         </HomeBody>
         

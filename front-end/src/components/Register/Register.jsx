@@ -65,7 +65,7 @@ export default function Register () {
                 <Input type={'text'} placeholder={'Nome'} value={name} onChange={(e) => setName(e.target.value)}/>
                 <Input type={'text'} placeholder={'Usuário'} value={username} onChange={(e) => setUsername(e.target.value)}/>
                 <Input type={'password'} placeholder={'Senha'} value={password} onChange={(e) => setPassword(e.target.value)}/>
-                <Input type={'password'} placeholder={'Confirme sua senha'} value={passwordConfirmation} onChange={(e) => setPasswordConfirmation(e.target.value)}/>
+                <Input type={'password'} placeholder={'Confirme a senha'} value={passwordConfirmation} onChange={(e) => setPasswordConfirmation(e.target.value)}/>
                 <Button onClick={registerUser}>
                     {loading ? (<LoadingSpin primaryColor={'#FFFFFF'} secondaryColor={'transparent'} size={'35px'} width={8} />
                         ) : (

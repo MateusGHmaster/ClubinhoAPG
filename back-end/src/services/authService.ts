@@ -1,6 +1,7 @@
 import findMasterUser, { CreateUserData, insertUserData, findByUserName } from '../repositories/authRepository.js';
 import bcrypt from 'bcrypt';
 import Jwt  from 'jsonwebtoken';
+import jwtDecode from 'jwt-decode';
 
 export async function signUpService (userData: CreateUserData) {
 
@@ -66,7 +67,8 @@ export async function loginService (userData: CreateUserData) {
     }
 
     const token = Jwt.sign({ id: user.id, username, isAdmin}, process.env.JWT_SECRET, {expiresIn: '24h'});
+    const decodedToken = jwtDecode(token);
 
-    return token;
+    return ([token, decodedToken]);
 
 }

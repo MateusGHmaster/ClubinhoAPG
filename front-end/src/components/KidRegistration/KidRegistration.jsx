@@ -1,6 +1,7 @@
 import Input from '../General/Input';
 import Button from '../General/Button';
 import Logo from '../General/LogoRegister';
+import BackArrow from '../General/BackArrow';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import LoadingSpin from 'react-loading-spin';
@@ -72,6 +73,7 @@ export default function KidRegistration () {
     return (
 
         <RegisterBody>
+            {/* <BackArrow /> */}
             <LogoContainer>
                 <Logo />
             </LogoContainer>
