@@ -1,5 +1,4 @@
-/* import { AuthContext } from '../../context/AuthContext'; */
-import { /* useContext ,*/ useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Kid from './Kid';
 import styled from 'styled-components';
@@ -9,19 +8,7 @@ export default function Presence () {
 
     const [kids, setKids] = useState ([]);
     const [present, setPresent] = useState([]);
-    /*const { token } = useContext(AuthContext);*/
-    
     const navigate = useNavigate();
-
-    /* const config = {
-
-        headers: {
-
-            Authorization: `Bearer ${token}` 
-        
-        }
-
-    };  */
 
     function getKidsList () {
 

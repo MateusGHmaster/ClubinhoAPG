@@ -18,7 +18,6 @@ export default function HistoryByKidUnique () {
         promise.then(response => {
             const { data } = response;
             setPresenceList(data);
-            console.log(data)
         });
 
         promise.catch(e => {

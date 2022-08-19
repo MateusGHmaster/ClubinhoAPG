@@ -98,7 +98,7 @@ const BackgroundColor = styled.div`
     position: absolute;
 
     margin-top: -50px;
-    margin-left: -10px;
+    margin-left: -8px;
 
     height: 100%;
     width: 100%;

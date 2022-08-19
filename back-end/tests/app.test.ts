@@ -1,8 +1,10 @@
 import supertest from 'supertest';
-import userFactory from './factories/userFactory.js';
 import app from '../src/app.js';
 import prisma from '../src/config/database.js';
+import userFactory from './factories/userFactory.js';
 import kidFactory from './factories/kidFactory.js';
+import guardianFactory from './factories/guardianFactory.js';
+import presenceFactory from './factories/presenceFactory.js';
 
 beforeEach (async () => {
 
@@ -70,7 +72,7 @@ describe('register kid tests suite', () => {
 
     it('should create a guardian, and return status 201', async () => {
 
-       const signGuardian = kidFactory.createGuardianData();
+       const signGuardian = guardianFactory.createGuardianData();
        const response = await supertest(app).post('/register-r').send(signGuardian);
 
        expect(response.status).toEqual(201);
@@ -79,7 +81,7 @@ describe('register kid tests suite', () => {
 
     it('should return status 500, given absent guardian name', async () => {
 
-        const signGuardian = kidFactory.createGuardianData();
+        const signGuardian = guardianFactory.createGuardianData();
         
         delete signGuardian.guardianName;
 
@@ -116,7 +118,7 @@ describe('register presence', () => {
 
     it('should register presence, and return status 200', async () => {
 
-        const registerPresence = kidFactory.registerPresence();
+        const registerPresence = presenceFactory.registerPresence();
         const response = await supertest(app).post('/presence').send(registerPresence);
 
         expect(response.status).toEqual(200);
@@ -142,7 +144,7 @@ describe('get days when presence was registered', () => {
 
     it('should return a list with the days presences were registered', async () => {
 
-        const historyDaysList = kidFactory.getPresenceDays();
+        const historyDaysList = presenceFactory.getPresenceDays();
         const response = await supertest(app).get('/days-history');
 
         expect(response).not.toBeNull();
@@ -156,4 +158,3 @@ afterAll(async () => {
     await prisma.$disconnect();
 
 });
-//template: it('', async () => {}); 

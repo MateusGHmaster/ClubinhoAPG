@@ -73,7 +73,6 @@ export default function Register () {
                         ) 
                     }
                 </Button>
-                <StyledLink to='/'>Já possui uma conta? Entre!</StyledLink>
             </RegisterContainer>
         </RegisterBody>
     );
@@ -105,18 +104,6 @@ const RegisterContainer = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    font-family: 'Roboto', sans-serif;
-
-`;
-
-const StyledLink = styled(Link)`
-
-    margin-top: 15px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #FFFFFF;
     font-family: 'Roboto', sans-serif;
 
 `;
